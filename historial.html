@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+  ========================================================================
+  HISTORIAL — muestra automáticamente los meses ANTERIORES al actual
+  ========================================================================
+  CADA MES cambias SOLO la palabra en la línea marcada  >>> CAMBIAR <<<
+  (pon el MISMO mes actual que pusiste en la portada index.html).
+  El sistema mostrará solo los meses anteriores a ese, en orden.
+  No toques la lista de meses ni el resto del código.
+  ========================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afiches de Seguridad TI — Meses anteriores</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    body {
+      margin:0; font-family: Arial, sans-serif; background:#f0f2f5; color:#1a1a2e;
+      display:flex; flex-direction:column; align-items:center; padding:24px 16px;
+    }
+    .card {
+      background:#fff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,.08);
+      max-width:520px; width:100%; padding:28px 24px;
+    }
+    h1 { font-size:20px; margin:0 0 4px; text-align:center; }
+    .sub { color:#666; font-size:14px; margin-bottom:24px; text-align:center; }
+    .mes-link {
+      display:block; text-decoration:none; color:#2c3e50;
+      background:#f7f8fa; padding:14px; border-radius:8px; margin-bottom:8px; font-size:15px;
+    }
+    .mes-link:hover { background:#eef0f3; }
+    .vacio { color:#888; font-size:14px; text-align:center; padding:12px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Afiches de Seguridad TI</h1>
+    <div class="sub">Meses anteriores</div>
+    <div id="lista"></div>
+  </div>
+
+  <script>
+    // ===== >>> CAMBIAR <<< : pon aquí el MISMO mes actual que en la portada =====
+    var MES_ACTUAL = "setiembre";
+    // ==========================================================================
+
+    // Orden fijo de los 12 meses (carpeta y etiqueta que se muestra)
+    var MESES = [
+      {c:"enero",     t:"Enero — No dejes que la energía se escape"},
+      {c:"febrero",   t:"Febrero — Transporta tu laptop con cuidado"},
+      {c:"marzo",     t:"Marzo — Piensa antes de imprimir"},
+      {c:"abril",     t:"Abril — La tecnología tiene un final responsable"},
+      {c:"mayo",      t:"Mayo — Cuida tu tecnología y cuida de ti"},
+      {c:"junio",     t:"Junio — Prevenir es mejor que reparar"},
+      {c:"julio",     t:"Julio — Apaga, ahorra y cuida el planeta"},
+      {c:"agosto",    t:"Agosto — Tu equipo también necesita descansar"},
+      {c:"setiembre", t:"Setiembre — Cuida tu batería, cuida tu laptop"},
+      {c:"octubre",   t:"Octubre — Un equipo limpio trabaja mejor"},
+      {c:"noviembre", t:"Noviembre — Configura tu equipo para ahorrar"},
+      {c:"diciembre", t:"Diciembre — Un equipo optimizado es más eficiente"}
+    ];
+
+    // Encuentra la posición del mes actual y muestra solo los anteriores
+    var idx = MESES.findIndex(function(m){ return m.c === MES_ACTUAL; });
+    var cont = document.getElementById("lista");
+
+    if (idx <= 0) {
+      cont.innerHTML = '<div class="vacio">Aún no hay meses anteriores para mostrar.</div>';
+    } else {
+      // Anteriores = del índice 0 hasta idx-1; se muestran del más reciente al más antiguo
+      var html = "";
+      for (var i = idx - 1; i >= 0; i--) {
+        html += '<a class="mes-link" href="' + MESES[i].c + '/">' + MESES[i].t + '</a>';
+      }
+      cont.innerHTML = html;
+    }
+  </script>
+</body>
+</html>
