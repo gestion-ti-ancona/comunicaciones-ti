@@ -3,9 +3,13 @@
   ========================================================================
   HISTORIAL — muestra automáticamente los meses ANTERIORES al actual
   ========================================================================
+  El orden de publicación empieza en SETIEMBRE y avanza:
+  setiembre -> octubre -> noviembre -> diciembre -> enero -> ... -> agosto.
+  El historial muestra solo los meses YA publicados (anteriores al actual
+  en ese orden real), nunca los que todavía no salen.
+
   CADA MES cambias SOLO la palabra en la línea marcada  >>> CAMBIAR <<<
   (pon el MISMO mes actual que pusiste en la portada index.html).
-  El sistema mostrará solo los meses anteriores a ese, en orden.
   No toques la lista de meses ni el resto del código.
   ========================================================================
 -->
@@ -46,8 +50,12 @@
     var MES_ACTUAL = "setiembre";
     // ==========================================================================
 
-    // Orden fijo de los 12 meses (carpeta y etiqueta que se muestra)
+    // Orden REAL de publicación (empieza en setiembre y avanza hasta agosto).
     var MESES = [
+      {c:"setiembre", t:"Setiembre — Cuida tu batería, cuida tu laptop"},
+      {c:"octubre",   t:"Octubre — Un equipo limpio trabaja mejor"},
+      {c:"noviembre", t:"Noviembre — Configura tu equipo para ahorrar"},
+      {c:"diciembre", t:"Diciembre — Un equipo optimizado es más eficiente"},
       {c:"enero",     t:"Enero — No dejes que la energía se escape"},
       {c:"febrero",   t:"Febrero — Transporta tu laptop con cuidado"},
       {c:"marzo",     t:"Marzo — Piensa antes de imprimir"},
@@ -55,21 +63,17 @@
       {c:"mayo",      t:"Mayo — Cuida tu tecnología y cuida de ti"},
       {c:"junio",     t:"Junio — Prevenir es mejor que reparar"},
       {c:"julio",     t:"Julio — Apaga, ahorra y cuida el planeta"},
-      {c:"agosto",    t:"Agosto — Tu equipo también necesita descansar"},
-      {c:"setiembre", t:"Setiembre — Cuida tu batería, cuida tu laptop"},
-      {c:"octubre",   t:"Octubre — Un equipo limpio trabaja mejor"},
-      {c:"noviembre", t:"Noviembre — Configura tu equipo para ahorrar"},
-      {c:"diciembre", t:"Diciembre — Un equipo optimizado es más eficiente"}
+      {c:"agosto",    t:"Agosto — Tu equipo también necesita descansar"}
     ];
 
-    // Encuentra la posición del mes actual y muestra solo los anteriores
+    // Encuentra la posición del mes actual y muestra solo los ya publicados
     var idx = MESES.findIndex(function(m){ return m.c === MES_ACTUAL; });
     var cont = document.getElementById("lista");
 
     if (idx <= 0) {
       cont.innerHTML = '<div class="vacio">Aún no hay meses anteriores para mostrar.</div>';
     } else {
-      // Anteriores = del índice 0 hasta idx-1; se muestran del más reciente al más antiguo
+      // Anteriores = del índice 0 hasta idx-1; el más reciente arriba
       var html = "";
       for (var i = idx - 1; i >= 0; i--) {
         html += '<a class="mes-link" href="' + MESES[i].c + '/">' + MESES[i].t + '</a>';
